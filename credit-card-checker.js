@@ -54,6 +54,52 @@ const batch = [
 //  This style is based off of Valve's source language for QC, VMT, FGD, and "gameinfo.txt" 
 //=============================================================================================
 
+const validateCred = (arr) => {
+  let sum = 0;
+
+  for (let i = arr.length - 1; i >= 0; i--) {
+      let digit = arr[i];
+      let position = arr.length - i;
+      if (position % 2 === 0) {
+          digit = digit * 2;
+          if (digit > 9) digit -= 9;
+      }
+      sum += digit;
+  }
+
+  return sum % 10 === 0;
+}
+
+const findInvalidCards = (nestedArrays) => {
+return nestedArrays.filter((arr) => !validateCred(arr));
+};
+
+console.log(findInvalidCards(batch));
+
+const idInvalidCardCompanies = (arr) => {
+  let companiesArr = [];
+
+  arr.forEach( (subArr) => {
+      if (subArr[0] === 3) {
+          if (!companiesArr.includes("Amex")) companiesArr.push("Amex");
+      } else if (subArr[0] === 4) {
+          if (!companiesArr.includes("Visa")) companiesArr.push("Visa");
+      } else if (subArr[0] === 5) {
+          if (!companiesArr.includes("Mastercard")) companiesArr.push("Mastercard");
+      } else if (subArr[0] === 6) {
+          if (!companiesArr.includes("Discover")) companiesArr.push("Discover");
+      } else {
+          console.log('Company not found');
+      }
+  });
+
+  return companiesArr;
+};
+
+console.log(idInvalidCardCompanies(findInvalidCards(batch)));
+
+/*    OLDER CODE LEFT FOR REFERENCE/ARCHIVAL PURPOSE
+
 
 const validateCred = (arr) => { 
   let doubledDigits = [];
@@ -73,7 +119,7 @@ const validateCred = (arr) => {
       );
     }
 
-/*    OLDER CODE LEFT FOR REFERENCE/ARCHIVAL PURPOSE
+
     for (let i = arr.length - 1; i >= 0; i -= 1) {
         if (arr.length % 2 === 0) {
             if (i % 2 === 0) {
@@ -90,7 +136,7 @@ const validateCred = (arr) => {
         }
         doubledDigits.push(arr[i]);
     }
-*/
+
   }
 
 
@@ -119,5 +165,4 @@ const idInvalidCardCompanies = (arr) => {
     });
         return companiesArr;
 };
-
-console.log(idInvalidCardCompanies(findInvalidCards(batch)));
+*/
