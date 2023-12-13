@@ -22,6 +22,27 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\credit-card-checker.js"
+        },
+
+        {
+            "type": "msedge",
+            "request": "launch",
+            "name": "Number guessor",
+            "file": "${workspaceFolder}\\number_guessor\\index.html"
+        },
+
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Mystery Organism",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "outFiles": [
+                "${workspaceFolder}\\mystery-organism-starter\\main.js"
+            ],
+            "program": "${workspaceFolder}\\mystery-organism-starter\\main.js",
+            "runtimeExecutable": "C:\\Users\\7g.4h\\Documents\\node-v18.17.1-win-x64\\node"
         }
     ]
 }
