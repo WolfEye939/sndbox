@@ -55,9 +55,25 @@ const batch = [
 //=============================================================================================
 
 
-const validateCred = (arr) => {
-    let doubledDigits = [];
+const validateCred = (arr) => { 
+  let doubledDigits = [];
 
+    for (let i = arr.length - 1; i >= 0; i -= 1) {
+      let digit = arr[i];
+      let position = arr.length - i;
+      if (position % 2 === 0) {
+          digit = digit * 2 > 9 ? digit * 2 - 9 : digit * 2;
+      }
+      doubledDigits.push(digit);
+
+
+      return (
+        doubledDigits.reduce(   (accumulator, currentValue) => accumulator + currentValue   ) 
+        %10 === 0
+      );
+    }
+
+/*    OLDER CODE LEFT FOR REFERENCE/ARCHIVAL PURPOSE
     for (let i = arr.length - 1; i >= 0; i -= 1) {
         if (arr.length % 2 === 0) {
             if (i % 2 === 0) {
@@ -74,13 +90,9 @@ const validateCred = (arr) => {
         }
         doubledDigits.push(arr[i]);
     }
+*/
+  }
 
-
-  return (
-    doubledDigits.reduce(   (accumulator, currentValue) => accumulator + currentValue   ) 
-    %10 === 0
-  );
-}
 
 const findInvalidCards = (nestedArrays) => {
   return nestedArrays.filter((arr) => !validateCred(arr));
